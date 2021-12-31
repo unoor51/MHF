@@ -16,7 +16,7 @@ class DashboardController extends Controller
     {
         $data['title'] = 'Dashboard'; 
         $data['active'] = 'dashboard'; 
-        return view('home',$data);
+        return view('admin.dashboard',$data);
     }
 
     /**

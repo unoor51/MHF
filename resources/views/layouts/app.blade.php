@@ -18,7 +18,7 @@
         @include('includes.navigation')
         
 
-        <main class="py-4">
+        <main>
             @yield('content')
         </main>
          <footer class="footer">

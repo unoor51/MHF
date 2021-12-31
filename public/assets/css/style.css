@@ -11456,7 +11456,9 @@ icons path
   padding: 17px 15px;
   right: 0;
   border-top: 1px solid #e9ecef;
-  background: #fff; }
+  background: #fff;
+  position:fixed;
+   }
 
 /*******************
 Wave Effects

@@ -25,6 +25,9 @@ Route::post('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logou
 
 // Admin and Super Admin Dashboard routes
 
-Route::get('/dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('home');
+Route::get('/dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
+Route::get('/drivers', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('drivers');
+Route::get('/drivers/add', [App\Http\Controllers\Admin\DriversController::class, 'create'])->name('addDriver');
+Route::post('/drivers/add', [App\Http\Controllers\Admin\DriversController::class, 'store'])->name('addDriver');
 
 

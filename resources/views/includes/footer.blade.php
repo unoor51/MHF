@@ -19,4 +19,4 @@
     <script src="{{ asset('assets/js/wysihtml5-0.3.0.js') }}"></script>
     <script src="{{ asset('assets/js/bootstrap-wysihtml5.js') }}"></script>
     <!--Custom JavaScript -->
-    <script src="assets/js/custom.js"></script>
+    <script src="{{ asset('assets/js/custom.js') }}"></script>
