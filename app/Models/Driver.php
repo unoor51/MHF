@@ -15,9 +15,9 @@ class Driver extends Model
         'driver_number',
         'driver_token',
         'user_id',
-        'driver_token'
+        'driver_token',
+        'profile_img'
         // add all other fields
     ];
-
 
 }

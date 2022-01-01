@@ -16,7 +16,13 @@ class DriversController extends Controller
      */
     public function index()
     {
-        //
+        $user_id = Auth::id();
+        $drivers = Driver::where('user_id',$user_id)->get()->toArray();
+        
+        $data['title'] = 'Drivers List'; 
+        $data['active'] = 'drivers'; 
+        $data['drivers'] = 'drivers'; 
+        return view('admin.drivers.index',$data);
     }
 
     /**
@@ -26,7 +32,7 @@ class DriversController extends Controller
      */
     public function create()
     { 
-        $data['title'] = 'Drivers'; 
+        $data['title'] = 'Add Driver'; 
         $data['active'] = 'drivers'; 
         return view('admin.drivers.add',$data);
     }
@@ -60,18 +66,16 @@ class DriversController extends Controller
         $driver = new Driver([
             "driver_name" => $request->get('driver_name'),
             "driver_email" => $request->get('driver_email'),
-            "driver_phone" => $request->get('driver_phone'),
-            "profile_img" => $request->profile_img->hashName(),
+            "driver_number" => $request->get('driver_number'),
+            "profile_img" =>  $file_name,
             "user_id" => $user_id,
             "driver_token" => Str::random(32)
         ]);
+
         $driver->save(); // Finally, save the record.
-        // echo $file_name;
         $data['title'] = 'Drivers'; 
         $data['active'] = 'drivers'; 
-        return view('admin.drivers.add',$data);
-
-        // return view('admin.drivers.index');
+        return redirect('drivers')->with('status', 'Driver Addedd Successfully');
     }
 
     /**
