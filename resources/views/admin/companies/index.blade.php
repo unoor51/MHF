@@ -63,20 +63,26 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <?php //echo "<pre>";print_r($companies);die;?>
+                                                @if(count($companies))
                                                 @foreach($companies as $company)
                                                 <tr>
-                                                    <td>{{ $company['name'] }}</td>
-                                                    <td>{{ $company['email'] }}</td>
-                                                    <td>{{ $company['registration_no'] }}</td>
-                                                    <td><img src="/storage/app/public/companies/{{$company['logo']}}" height="100px" width="100px" alt="Any alt text"/></td>
-                                                    <td>{{ $company['password'] }}</td>
+                                                    <td>{{ $company->name }}</td>
+                                                    <td>{{ $company->email }}</td>
+                                                    <td>{{ $company->registration_no }}</td>
+                                                    <td><img src="{{ asset('storage/companies/'.$company->logo)}}" height="100px" width="100px" alt="Any alt text"/></td>
+                                                    <td>{{ $company->password }}</td>
                                                     <td>
-                                                        <a href="#" class="btn btn-info">Edit</a>
-                                                        <a href="delete/{{ $company['id'] }}" class="btn btn-danger">Delete</a>
+                                                        <a href=" {{route('edit', ['id' => $company->id])}}" class="btn btn-info">edit</a>
+
+                                                        <a href=" {{route('del_company', ['id' => $company->id])}}" class="btn btn-danger">Delete</a>
                                                     </td>
                                                 </tr>
                                                 @endforeach
+                                                @else
+                                                <tr>
+                                                    <td colspan="6">No, Record found!!</td>
+                                                </tr>
+                                                @endif
                                             </tbody>
                                         </table>
                                     </div>
@@ -100,4 +106,8 @@
     <!-- End Page wrapper  -->
     <!-- ============================================================== -->
 
+@endsection
+
+
+@section('scripts')
 @endsection

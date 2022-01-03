@@ -18,14 +18,11 @@ class CompanyController extends Controller
      */
     public function index()
     {
-        //$user_id = Auth::id();
-        // $companies = User::where('user_id',$user_id)->get()->toArray();
-        $companies = User::where('user_type','admin')->get()->toArray();
-        
-        $data['title'] = 'Companies List'; 
-        $data['active'] = 'companies'; 
-        $data['companies'] = $companies; 
-        return view('admin.companies.index',$data);
+        $companies = User::where('user_type','admin')->get();        
+        $title = 'Companies List'; 
+        $active = 'companies'; 
+//        dd($companies, $a, $b asdasd);
+        return view('admin.companies.index', compact('companies', 'title', 'active'));
 
         
     }
@@ -93,9 +90,13 @@ class CompanyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function edit($id)
     {
-        //
+         $company = User::find($id);        
+        $title = 'Edit Companies'; 
+        $active = 'companies'; 
+        //dd($company);
+        return view('admin.companies.edit', compact('company', 'title', 'active'));
     }
 
     /**
@@ -104,10 +105,7 @@ class CompanyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        //
-    }
+    
 
     /**
      * Update the specified resource in storage.
@@ -117,8 +115,37 @@ class CompanyController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        //
+    {   
+        $validated = $request->validate([
+            'name' => 'required',
+            'email' => 'required|unique:users',
+        ]);  
+        
+        if ($request->hasFile('logo')) {
+
+            $validated = $request->validate([
+                'logo' => 'mimes:jpg,jpeg,png' // Only allow .jpg, .bmp and .png file types.
+            ]);
+
+            // Save the file locally in the storage/public/ folder under a new folder named /companies
+            $request->logo->store('companies', 'public');
+            $file_name = $request->logo->hashName();
+        }else{
+            $file_name=$request->get('old_logo');
+        }
+        
+        // Store the record, using the new file hashname which will be it's new filename identity.
+        $user = new User([
+            "name" => $request->get('name'),
+            "email" => $request->get('email'),
+            "registration_no" => $request->get('registration_no'),
+            "logo" =>  $file_name,
+            "user_type" =>"admin",
+            "remember_token" => Str::random(32)
+        ]);
+        
+        $user->where('id',$request->get('id'))->update(); // Finally, save the record.
+        return redirect('/CompanyController/index');
     }
 
     /**
@@ -129,6 +156,8 @@ class CompanyController extends Controller
      */
     public function destroy($id)
     {
-        //
+        User::find($id)->delete();
+        return back()->withSuccess(['User deleted!!']);
+
     }
 }
