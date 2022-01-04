@@ -9,7 +9,7 @@
                     <div class="user-pro-body">
                         <div><img src="{{ asset('assets/images/users/2.jpg') }}" alt="user-img" class="img-circle"></div>
                         <div class="dropdown">
-                            <a href="javascript:void(0)" class="dropdown-toggle u-dropdown link hide-menu" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->name }}  <span class="caret"></span></a>
+                            <a href="javascript:void(0)" class="dropdown-toggle u-dropdown link hide-menu" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ @Auth::user()->name }}  <span class="caret"></span></a>
                             <div class="dropdown-menu animated flipInY">
                                 <!-- text-->
                                 <a href="javascript:void(0)" class="dropdown-item"><i class="ti-user"></i> My Profile</a>
@@ -32,10 +32,10 @@
                         <li> <a class="waves-effect waves-dark @if($active == 'dashboard') active @endif " href="{{ route('dashboard') }}" aria-expanded="false"><i class="fa fa-dashboard"></i><span class="hide-menu">Dashboard </span></a>
                             
                         </li>
-                        <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-building"></i><span class="hide-menu">Companies </span></a>
+                        <li> <a class="has-arrow waves-effect waves-dark @if($active == 'companies') active @endif""  href="javascript:void(0)" aria-expanded="false"><i class="fa fa-building"></i><span class="hide-menu">Companies </span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="companies.html">Companies </a></li>
-                                <li><a href="add-company.html">Add Company</a></li>
+                                <li><a href="{{ route('companies') }}">Companies </a></li>
+                                <li><a href="{{ route('addCompanies') }}">Add Company</a></li>
                             </ul>
                         </li>
                         <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-car"></i><span class="hide-menu">Cars </span></a>

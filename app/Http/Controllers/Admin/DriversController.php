@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use App\Models\Driver;
+use App\Models\Driver; 
 use Auth;
 class DriversController extends Controller
 {
