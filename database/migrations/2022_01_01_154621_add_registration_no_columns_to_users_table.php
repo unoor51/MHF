@@ -17,6 +17,7 @@ class AddRegistrationNoColumnsToUsersTable extends Migration
             //
             $table->string('registration_no')->nullable();
             $table->string('logo','100');
+            $table->string('device_token','255');
         });
     }
 
@@ -31,6 +32,7 @@ class AddRegistrationNoColumnsToUsersTable extends Migration
             //
             $table->string('registration_no')->nullable();
             $table->string('logo','100');
+            $table->string('device_token','255');
         });
     }
 }
