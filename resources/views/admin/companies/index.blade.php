@@ -58,7 +58,7 @@
                                                     <th>Email</th>
                                                     <th>Registration Number</th>
                                                     <th>Logo</th>
-                                                    <th width="20%">Password</th>
+                                                    <!--th width="20%">Password</th-->
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
@@ -70,9 +70,9 @@
                                                     <td>{{ $company->email }}</td>
                                                     <td>{{ $company->registration_no }}</td>
                                                     <td><img src="{{ asset('storage/companies/'.$company->logo)}}" height="100px" width="100px" alt="Any alt text"/></td>
-                                                    <td>{{ $company->password }}</td>
+                                                    <!--td>{{ $company->password }}</td-->
                                                     <td>
-                                                        <a href=" {{route('edit', ['id' => $company->id])}}" class="btn btn-info">edit</a>
+                                                        <a href=" {{route('edit', ['id' => $company->id])}}" class="btn btn-info">Edit</a>
 
                                                         <a href=" {{route('del_company', ['id' => $company->id])}}" class="btn btn-danger">Delete</a>
                                                     </td>

@@ -43,7 +43,7 @@
                         @endif
                     </div>
                 </div>
-                <div class="row">
+                <div class="row"> 
 
                     <!-- Column Start -->
                     <div class="col-lg-12">
@@ -61,18 +61,27 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-
+                                                @if(count($drivers))
+                                                @foreach($drivers as $driver)
                                                 <tr>
-                                                    <td>Noor</td>
-                                                    <td>unoor51@gmail.com</td>
-                                                    <td>0347770100</td>
-                                                    <td></td>
+                                                    <td>{{ $driver->driver_name }}</td>
+                                                    <td>{{ $driver->driver_email }}</td>
+                                                    <td>{{ $driver->driver_number }}</td>
                                                     <td>
-                                                        <a href="#" class="btn btn-info">Edit</a>
-                                                        <a href="#" class="btn btn-danger">Delete</a>
+                                                        <img src="{{ asset('storage/drivers/'.$driver->profile_img)}}" height="100px" width="100px" alt="Any alt text"/>
+                                                    </td>
+                                                    <td>
+                                                         <a href=" {{route('edit_driver', ['id' => $driver->id])}}" class="btn btn-info">Edit</a>
+
+                                                        <a href=" {{route('del_driver', ['id' => $driver->id])}}" class="btn btn-danger">Delete</a>
                                                     </td>
                                                 </tr>
-
+                                                @endforeach
+                                                @else
+                                                <tr>
+                                                    <td colspan="6">No, Record found!!</td>
+                                                </tr>
+                                                @endif
                                             </tbody>
                                         </table>
                                     </div>

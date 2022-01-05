@@ -62,12 +62,9 @@ class CompanyController extends Controller
                 'logo' => 'mimes:jpg,jpeg,png' // Only allow .jpg, .bmp and .png file types.
             ]);
 
-            // Save the file locally in the storage/public/ folder under a new folder named /companies
             $request->logo->store('companies', 'public');
             $file_name = $request->logo->hashName();
         }
-        
-        // Store the record, using the new file hashname which will be it's new filename identity.
         $user = new User([
             "name" => $request->get('name'),
             "email" => $request->get('email'),
@@ -77,7 +74,6 @@ class CompanyController extends Controller
             "user_type" =>"admin",
             "remember_token" => Str::random(32)
         ]);
-        //echo "<pre>";print_r($user);echo "</pre>";die;
         $user->save(); // Finally, save the record.
         $data['title'] = 'Companies'; 
         $data['active'] = 'companies'; 
@@ -92,7 +88,7 @@ class CompanyController extends Controller
      */
     public function edit($id)
     {
-         $company = User::find($id);        
+        $company = User::find($id);        
         $title = 'Edit Companies'; 
         $active = 'companies'; 
         //dd($company);
@@ -114,7 +110,7 @@ class CompanyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {   
         $validated = $request->validate([
             'name' => 'required',
@@ -126,26 +122,21 @@ class CompanyController extends Controller
             $validated = $request->validate([
                 'logo' => 'mimes:jpg,jpeg,png' // Only allow .jpg, .bmp and .png file types.
             ]);
-
-            // Save the file locally in the storage/public/ folder under a new folder named /companies
             $request->logo->store('companies', 'public');
             $file_name = $request->logo->hashName();
         }else{
             $file_name=$request->get('old_logo');
         }
-        
-        // Store the record, using the new file hashname which will be it's new filename identity.
-        $user = new User([
-            "name" => $request->get('name'),
-            "email" => $request->get('email'),
-            "registration_no" => $request->get('registration_no'),
-            "logo" =>  $file_name,
-            "user_type" =>"admin",
-            "remember_token" => Str::random(32)
-        ]);
-        
-        $user->where('id',$request->get('id'))->update(); // Finally, save the record.
-        return redirect('/CompanyController/index');
+        $users = User::find($request->get('id'));
+        $users->name = $request->get('name');
+        $users->email = $request->get('email');
+        $users->registration_no = $request->get('registration_no');
+        $users->logo = $file_name;
+        $users->user_type = 'admin';
+        $users->remember_token = Str::random(32);
+
+        $users->save();
+        return redirect('companies')->with('status', 'Company updated Successfully');
     }
 
     /**

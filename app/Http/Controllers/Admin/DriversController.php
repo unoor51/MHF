@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Models\Driver; 
 use Auth;
+use Illuminate\Support\Facades\Hash;
 class DriversController extends Controller
 {
     /**
@@ -17,12 +18,12 @@ class DriversController extends Controller
     public function index()
     {
         $user_id = Auth::id();
-        $drivers = Driver::where('user_id',$user_id)->get()->toArray();
+        //$drivers = Driver::where('user_id',$user_id)->get()->toArray();
+        $drivers = Driver::where('user_id',$user_id)->get(); 
+        $title = 'Drivers List'; 
+        $active = 'drivers'; 
         
-        $data['title'] = 'Drivers List'; 
-        $data['active'] = 'drivers'; 
-        $data['drivers'] = 'drivers'; 
-        return view('admin.drivers.index',$data);
+        return view('admin.drivers.index', compact('drivers', 'title', 'active'));
     }
 
     /**
@@ -64,17 +65,18 @@ class DriversController extends Controller
         }
         // Store the record, using the new file hashname which will be it's new filename identity.
         $driver = new Driver([
-            "driver_name" => $request->get('driver_name'),
-            "driver_email" => $request->get('driver_email'),
+            "driver_name"   => $request->get('driver_name'),
+            "driver_email"  => $request->get('driver_email'),
             "driver_number" => $request->get('driver_number'),
-            "profile_img" =>  $file_name,
-            "user_id" => $user_id,
-            "driver_token" => Str::random(32)
+            "driver_token"  => $request->get('driver_token'),
+            "profile_img"   =>  $file_name,
+            "user_id"       => $user_id,
+            "driver_token"  => Str::random(32)
         ]);
 
         $driver->save(); // Finally, save the record.
         $data['title'] = 'Drivers'; 
-        $data['active'] = 'drivers'; 
+        $data['active'] = 'drivers';  
         return redirect('drivers')->with('status', 'Driver Addedd Successfully');
     }
 
@@ -97,7 +99,11 @@ class DriversController extends Controller
      */
     public function edit($id)
     {
-        //
+        $driver = Driver::find($id);        
+        $title = 'Edit Driver'; 
+        $active = 'drivers'; 
+        //dd($company);
+        return view('admin.drivers.edit', compact('driver', 'title', 'active'));
     }
 
     /**
@@ -107,9 +113,39 @@ class DriversController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'driver_name' => 'required',
+            'driver_email' => 'required|unique:drivers',
+        ]);  
+
+        if ($request->hasFile('profile_img')) {
+
+            $validated = $request->validate([
+                'profile_img' => 'mimes:jpg,jpeg,png' // Only allow .jpg, .bmp and .png file types.
+            ]);
+
+            // Save the file locally in the storage/public/ folder under a new folder named /drivers
+            $request->profile_img->store('drivers', 'public');
+            $file_name = $request->profile_img->hashName();
+        }else{
+            $file_name=$request->get('old_image');
+        }
+        // Store the record, using the new file hashname which will be it's new filename identity.
+        $driver = Driver::find($request->get('id'));
+        
+            $driver->driver_name    = $request->get('driver_name');
+            $driver->driver_email   = $request->get('driver_email');
+            $driver->driver_number  = $request->get('driver_number');
+            $driver->profile_img    = $file_name;
+            $driver->user_id        = $request->get('user_id');
+            $driver->driver_token   = Str::random(32);
+
+        $driver->save(); 
+        $data['title'] = 'Drivers'; 
+        $data['active'] = 'drivers';  
+        return redirect('drivers')->with('status', 'Driver updated Successfully');
     }
 
     /**
@@ -120,6 +156,7 @@ class DriversController extends Controller
      */
     public function destroy($id)
     {
-        //
+       Driver::find($id)->delete();
+        return back()->withSuccess(['Driver deleted!!']);
     }
 }

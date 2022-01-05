@@ -30,12 +30,16 @@ Route::get('/drivers', [App\Http\Controllers\Admin\DriversController::class, 'in
 Route::get('/drivers/add', [App\Http\Controllers\Admin\DriversController::class, 'create'])->name('addDriver');
 Route::post('/drivers/add', [App\Http\Controllers\Admin\DriversController::class, 'store'])->name('addDriver');
 
+Route::get('/drivers/edit/{id}', [App\Http\Controllers\Admin\DriversController::class, 'edit'])->name('edit_driver');
+Route::post('/drivers/update', [App\Http\Controllers\Admin\DriversController::class, 'update'])->name('update_driver');
+Route::get('/drivers/{id}', [App\Http\Controllers\Admin\DriversController::class, 'destroy'])->name('del_driver');
+
 // Companies routes
 
 Route::get('/companies', [App\Http\Controllers\Admin\CompanyController::class, 'index'])->name('companies');
 Route::get('/companies/add', [App\Http\Controllers\Admin\CompanyController::class, 'create'])->name('addCompanies');
 Route::get('/companies/edit/{id}', [App\Http\Controllers\Admin\CompanyController::class, 'edit'])->name('edit');
-Route::get('/companies/update', [App\Http\Controllers\Admin\CompanyController::class, 'update'])->name('update');
+Route::post('/companies/update', [App\Http\Controllers\Admin\CompanyController::class, 'update'])->name('update');
 
 Route::post('/companies/add', [App\Http\Controllers\Admin\CompanyController::class, 'store'])->name('addCompanies');
 Route::get('/companies/{id}', [App\Http\Controllers\Admin\CompanyController::class, 'destroy'])->name('del_company');
