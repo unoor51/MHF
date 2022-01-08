@@ -117,10 +117,10 @@ class DriversController extends Controller
     {
         $validated = $request->validate([
             'driver_name' => 'required',
-            'driver_email' => 'required|unique:drivers',
+            'driver_email' => 'required',
         ]);  
 
-        if ($request->hasFile('profile_img')) {
+        if($request->hasFile('profile_img')) {
 
             $validated = $request->validate([
                 'profile_img' => 'mimes:jpg,jpeg,png' // Only allow .jpg, .bmp and .png file types.

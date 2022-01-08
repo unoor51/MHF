@@ -20,3 +20,14 @@
     <script src="{{ asset('assets/js/bootstrap-wysihtml5.js') }}"></script>
     <!--Custom JavaScript -->
     <script src="{{ asset('assets/js/custom.js') }}"></script>
+    <script>
+        $("#is_leased").change(function(){
+            var type = $(this).val();
+            if(type==0)
+            {
+                $('#leased_company_name').hide();
+            }else{
+                $('#leased_company_name').show();
+            }
+    })
+    </script>

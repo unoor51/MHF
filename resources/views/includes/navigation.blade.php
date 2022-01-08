@@ -38,13 +38,13 @@
                                 <li><a href="{{ route('addCompanies') }}">Add Company</a></li>
                             </ul>
                         </li>
-                        <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-car"></i><span class="hide-menu">Cars </span></a>
+                        <li> <a class="has-arrow waves-effect waves-dark @if($active == 'vehicles')active @endif" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-car"></i><span class="hide-menu">Vehicle </span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="collections.html">Cars </a></li>
-                                <li><a href="add-collection.html">Add Car</a></li>
+                                <li><a href="{{route('vehicles')}}">Vehicles </a></li>
+                                <li><a href="{{route('addVehicle')}}">Add Vehicle</a></li>
+                                <li><a href="{{route('assignVehicle')}}">Assign Vehicle</a></li>
                             </ul>
                         </li>
- 
                         <li> <a class="has-arrow waves-effect waves-dark @if($active == 'drivers') active @endif" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-user"></i><span class="hide-menu">Drivers  </span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="{{ route('drivers') }}">Drivers </a></li>

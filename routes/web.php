@@ -44,5 +44,14 @@ Route::post('/companies/update', [App\Http\Controllers\Admin\CompanyController::
 Route::post('/companies/add', [App\Http\Controllers\Admin\CompanyController::class, 'store'])->name('addCompanies');
 Route::get('/companies/{id}', [App\Http\Controllers\Admin\CompanyController::class, 'destroy'])->name('del_company');
 
+// cars module
+
+Route::get('/vehicles', [App\Http\Controllers\Admin\VehiclesController::class, 'index'])->name('vehicles');
+Route::get('/vehicles/add', [App\Http\Controllers\Admin\VehiclesController::class, 'create'])->name('addVehicle');
+Route::get('/vehicles/edit/{id}', [App\Http\Controllers\Admin\VehiclesController::class, 'edit'])->name('editVehicle');
+Route::post('/companies/update', [App\Http\Controllers\Admin\VehiclesController::class, 'update'])->name('updateVehicle');
+Route::post('/companies/assign', [App\Http\Controllers\Admin\VehiclesController::class, 'update'])->name('assignVehicle');
+Route::post('/vehicles/add', [App\Http\Controllers\Admin\VehiclesController::class, 'store'])->name('addVehicle');
+Route::get('/vehicles/{id}', [App\Http\Controllers\Admin\VehiclesController::class, 'destroy'])->name('del_vehicle');
 
 

@@ -114,7 +114,7 @@ class CompanyController extends Controller
     {   
         $validated = $request->validate([
             'name' => 'required',
-            'email' => 'required|unique:users',
+            'email' => 'required',
         ]);  
         
         if ($request->hasFile('logo')) {
