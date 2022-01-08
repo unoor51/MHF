@@ -20,6 +20,8 @@
     <script src="{{ asset('assets/js/bootstrap-wysihtml5.js') }}"></script>
     <!--Custom JavaScript -->
     <script src="{{ asset('assets/js/custom.js') }}"></script>
+
+    <script src="//cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     <script>
         $("#is_leased").change(function(){
             var type = $(this).val();
@@ -30,4 +32,9 @@
                 $('#leased_company_name').show();
             }
     })
+    $(document).ready( function () {
+        $('#driverTable').DataTable();
+        $('#companiesTable').DataTable();
+        $('#vehicleTable').DataTable();
+    } );
     </script>

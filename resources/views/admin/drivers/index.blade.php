@@ -50,7 +50,7 @@
                         <div class="card">
                             <div class="card-body">
                                     <div class="table-responsive">
-                                        <table class="table">
+                                        <table class="table" id="driverTable">
                                             <thead>
                                                 <tr>
                                                     <th>Name</th>
@@ -71,9 +71,9 @@
                                                         <img src="{{ asset('storage/drivers/'.$driver->profile_img)}}" height="100px" width="100px" alt="Any alt text"/>
                                                     </td>
                                                     <td>
-                                                         <a href=" {{route('edit_driver', ['id' => $driver->id])}}" class="btn btn-info">Edit</a>
+                                                         <a href=" {{route('edit_driver', ['id' => encrypt($driver->id)])}}" class="btn btn-info">Edit</a>
 
-                                                        <a href=" {{route('del_driver', ['id' => $driver->id])}}" class="btn btn-danger">Delete</a>
+                                                        <a href=" {{route('del_driver', ['id' => encrypt($driver->id)])}}" class="btn btn-danger">Delete</a>
                                                     </td>
                                                 </tr>
                                                 @endforeach

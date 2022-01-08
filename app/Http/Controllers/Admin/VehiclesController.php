@@ -78,6 +78,7 @@ class VehiclesController extends Controller
 
     public function edit($id)
     {
+        $id= decrypt($id);
         $vehicle = Vehicle::find($id);        
         $title = 'Edit Vehicle'; 
         $active = 'vehilces'; 
@@ -129,6 +130,7 @@ class VehiclesController extends Controller
      */
     public function destroy($id)
     {
+        $id= decrypt($id);
         Vehicle::find($id)->delete();
        // return back()->withSuccess(['Vehicle deleted!!']);
         return redirect('vehicles')->with('status', 'Vehicle deleted!!');

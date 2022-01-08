@@ -88,6 +88,7 @@ class CompanyController extends Controller
      */
     public function edit($id)
     {
+        $id= decrypt($id);
         $company = User::find($id);        
         $title = 'Edit Companies'; 
         $active = 'companies'; 
@@ -147,6 +148,7 @@ class CompanyController extends Controller
      */
     public function destroy($id)
     {
+        $id= decrypt($id);
         User::find($id)->delete();
         return back()->withSuccess(['User deleted!!']);
 

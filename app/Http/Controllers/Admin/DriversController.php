@@ -99,6 +99,7 @@ class DriversController extends Controller
      */
     public function edit($id)
     {
+        $id= decrypt($id);
         $driver = Driver::find($id);        
         $title = 'Edit Driver'; 
         $active = 'drivers'; 
@@ -156,7 +157,8 @@ class DriversController extends Controller
      */
     public function destroy($id)
     {
-       Driver::find($id)->delete();
+        $id= decrypt($id);
+        Driver::find($id)->delete();
         return back()->withSuccess(['Driver deleted!!']);
     }
 }

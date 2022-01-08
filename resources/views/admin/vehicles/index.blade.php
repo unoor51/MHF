@@ -51,7 +51,7 @@
                             <div class="card-body">
                                     <div class="table-responsive">
                                         
-                                        <table class="table">
+                                        <table class="table" id="vehicleTable">
                                             <thead>
                                                 <tr>
                                                     <th>Registration Number</th>
@@ -92,9 +92,9 @@
                                                     <td><img src="{{ asset('storage/vehicles/'.$vehicle->vehicle_image)}}" height="100px" width="100px" alt="Any alt text"/></td>
                                                     
                                                     <td>
-                                                        <a href=" {{route('editVehicle', ['id' => $vehicle->id])}}" class="btn btn-info">Edit</a>
+                                                        <a href=" {{route('editVehicle', ['id' => encrypt($vehicle->id)])}}" class="btn btn-info">Edit</a>
 
-                                                        <a href=" {{route('del_vehicle', ['id' => $vehicle->id])}}" class="btn btn-danger">Delete</a>
+                                                        <a href=" {{route('del_vehicle', ['id' => encrypt($vehicle->id)])}}" class="btn btn-danger">Delete</a>
                                                     </td>
                                                 </tr>
                                                 @endforeach
