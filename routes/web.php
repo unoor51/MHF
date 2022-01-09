@@ -63,4 +63,14 @@ Route::post('/vehicle_assigning/update', [App\Http\Controllers\Admin\VehicleAssi
 Route::get('/vehicle_assigning/{id}', [App\Http\Controllers\Admin\VehicleAssigningController::class, 'destroy'])->name('del_vehicle_assign');
 Route::post('/vehicle_assigning/add', [App\Http\Controllers\Admin\VehicleAssigningController::class, 'store'])->name('vehicle_assign');
 
-
+Route::get('send-mail', function () {
+   
+    $details = [
+        'title' => 'Mail from vehilce.com',
+        'body' => 'This is for testing email using smtp'
+    ];
+   
+    \Mail::to('irtazakazmi67@gmail.com')->send(new \App\Mail\MyTestMail($details));
+   
+    dd("Email is Sent.");
+});
