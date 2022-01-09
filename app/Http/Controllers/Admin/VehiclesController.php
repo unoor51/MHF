@@ -12,7 +12,8 @@ class VehiclesController extends Controller
 {
     public function index() 
     {
-        $vehicles = Vehicle::get();        
+        $user_id = Auth::id();
+        $vehicles = Vehicle::where('user_id',$user_id)->get();        
         $title = 'Vehicles List'; 
         $active = 'vehicles'; 
 //        dd($companies, $a, $b asdasd);
@@ -41,7 +42,7 @@ class VehiclesController extends Controller
      */
     public function store(Request $request)
     {
-        
+        $user_id = Auth::user()->id;
         $validated = $request->validate([
             'reg_no' => 'required|unique:vehicle',
             'vehicle_name' => 'required',
@@ -68,7 +69,8 @@ class VehiclesController extends Controller
             "leased_company_name" => $request->get('leased_company_name'),
             "vehicle_color" => $request->get('vehicle_color'),
             "vehicle_brand" => $request->get('vehicle_brand'),
-            "vehicle_image" =>  $file_name,   
+            "vehicle_image" =>  $file_name, 
+            "user_id"       => $user_id,  
         ]);
         $vehicles->save(); // Finally, save the record.
         $data['title'] = 'Vehilces'; 
@@ -88,7 +90,7 @@ class VehiclesController extends Controller
 
     public function update(Request $request)
     {   
-       
+        $user_id = Auth::user()->id;
         $validated = $request->validate([
             'reg_no' => 'required',
             'vehicle_name' => 'required',
@@ -117,6 +119,7 @@ class VehiclesController extends Controller
         $vehicles->vehicle_color = $request->get('vehicle_color');
         $vehicles->vehicle_brand = $request->get('vehicle_brand');
         $vehicles->vehicle_image = $file_name;
+        $vehicles->user_id       = $user_id;
 
         $vehicles->save();
         return redirect('vehicles')->with('status', 'Vehicle updated Successfully');

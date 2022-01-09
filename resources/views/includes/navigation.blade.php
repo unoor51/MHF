@@ -42,7 +42,12 @@
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="{{route('vehicles')}}">Vehicles </a></li>
                                 <li><a href="{{route('addVehicle')}}">Add Vehicle</a></li>
-                                <li><a href="{{route('assignVehicle')}}">Assign Vehicle</a></li>
+                            </ul>
+                        </li>
+                        <li> <a class="has-arrow waves-effect waves-dark @if($active == 'vehicle_assigning')active @endif" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-car"></i><span class="hide-menu">Vehicle Assigning </span></a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li><a href="{{route('vehicle_assigning')}}">Assigned Vehicles </a></li>
+                                <li><a href="{{route('vehicle_assign')}}">Assign Vehicle</a></li>
                             </ul>
                         </li>
                         <li> <a class="has-arrow waves-effect waves-dark @if($active == 'drivers') active @endif" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-user"></i><span class="hide-menu">Drivers  </span></a>

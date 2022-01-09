@@ -22,6 +22,11 @@
     <script src="{{ asset('assets/js/custom.js') }}"></script>
 
     <script src="//cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/js/bootstrap-datetimepicker.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
     <script>
         $("#is_leased").change(function(){
             var type = $(this).val();
@@ -36,5 +41,17 @@
         $('#driverTable').DataTable();
         $('#companiesTable').DataTable();
         $('#vehicleTable').DataTable();
+        $('#vehicleAssigningTable').DataTable();
     } );
+    $(function(){
+        $('.date_picker').datepicker({ 
+           format: "yyyy-mm-dd", 
+           todayBtn: "linked", 
+           language: "de",
+            changeMonth: true,
+            changeYear: true,
+            showButtonPanel: true,
+            minDate: 0,
+        });
+    });
     </script>

@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-
+ 
 
 // Admin and Super Admin Auth routes
 Route::get('/login', [App\Http\Controllers\Auth\LoginController::class, 'showLoginForm'])->name('login');
@@ -49,9 +49,18 @@ Route::get('/companies/{id}', [App\Http\Controllers\Admin\CompanyController::cla
 Route::get('/vehicles', [App\Http\Controllers\Admin\VehiclesController::class, 'index'])->name('vehicles');
 Route::get('/vehicles/add', [App\Http\Controllers\Admin\VehiclesController::class, 'create'])->name('addVehicle');
 Route::get('/vehicles/edit/{id}', [App\Http\Controllers\Admin\VehiclesController::class, 'edit'])->name('editVehicle');
-Route::post('/companies/update', [App\Http\Controllers\Admin\VehiclesController::class, 'update'])->name('updateVehicle');
-Route::post('/companies/assign', [App\Http\Controllers\Admin\VehiclesController::class, 'update'])->name('assignVehicle');
+Route::post('/vehicles/update', [App\Http\Controllers\Admin\VehiclesController::class, 'update'])->name('updateVehicle');
+Route::post('/vehicles/assign', [App\Http\Controllers\Admin\VehiclesController::class, 'update'])->name('assignVehicle');
 Route::post('/vehicles/add', [App\Http\Controllers\Admin\VehiclesController::class, 'store'])->name('addVehicle');
 Route::get('/vehicles/{id}', [App\Http\Controllers\Admin\VehiclesController::class, 'destroy'])->name('del_vehicle');
+
+// vehicle assigning module
+
+Route::get('/vehicle_assigning', [App\Http\Controllers\Admin\VehicleAssigningController::class, 'index'])->name('vehicle_assigning');
+Route::get('/vehicle_assigning/add', [App\Http\Controllers\Admin\VehicleAssigningController::class, 'create'])->name('vehicle_assign');
+Route::get('/vehicle_assigning/edit/{id}', [App\Http\Controllers\Admin\VehicleAssigningController::class, 'edit'])->name('edit_assign_vehicle');
+Route::post('/vehicle_assigning/update', [App\Http\Controllers\Admin\VehicleAssigningController::class, 'update'])->name('update_assign_vehicle');
+Route::get('/vehicle_assigning/{id}', [App\Http\Controllers\Admin\VehicleAssigningController::class, 'destroy'])->name('del_vehicle_assign');
+Route::post('/vehicle_assigning/add', [App\Http\Controllers\Admin\VehicleAssigningController::class, 'store'])->name('vehicle_assign');
 
 
